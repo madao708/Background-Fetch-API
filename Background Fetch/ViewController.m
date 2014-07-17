@@ -85,11 +85,42 @@
 #pragma mark - TableView methods
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellNewsTitle"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"idCellNewsTitle"];
+    }
+    
+    NSDictionary *dict = [self.arrNewsData objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [dict objectForKey:@"title"];
+    cell.detailTextLabel.text = [dict objectForKey:@"pubDate"];
+    
+    return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return self.arrNewsData.count;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPat
+{
+    return 80.0;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dict = [self.arrNewsData objectAtIndex:indexPath.row];
+    
+    NSString *newsLink = [dict objectForKey:@"link"];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newsLink]];
+}
+
+
 @end
