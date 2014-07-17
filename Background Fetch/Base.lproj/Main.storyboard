@@ -24,7 +24,11 @@
                                     <rect key="frame" x="0.0" y="79" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <items>
-                                        <barButtonItem systemItem="trash" id="Qob-Qt-aq6"/>
+                                        <barButtonItem systemItem="trash" id="Qob-Qt-aq6">
+                                            <connections>
+                                                <action selector="removeDataFile:" destination="vXZ-lx-hvc" id="dC6-a9-05f"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </items>
                                 </toolbar>
                                 <prototypes>
@@ -62,7 +66,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="removeDataFile" destination="1k5-Oj-CYs" id="cqL-qj-pNn"/>
                         <outlet property="tableView" destination="1k5-Oj-CYs" id="O2N-4U-tgd"/>
                     </connections>
                 </viewController>
