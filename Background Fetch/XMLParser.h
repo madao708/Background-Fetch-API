@@ -11,6 +11,7 @@
 @interface XMLParser : NSObject <NSXMLParserDelegate>
 
 -(id)initWithXMLURLString:(NSString *)xmlUrlString;
+
 -(void)startParsingWithCompletionHandler:(void(^)(BOOL success, NSArray *dataArray, NSError *error))completionHandler;
 
 @end

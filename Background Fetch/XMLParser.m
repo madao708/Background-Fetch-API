@@ -17,11 +17,8 @@
 @property (nonatomic, strong) NSMutableArray *arrParsedData;
 
 @property (nonatomic, strong) NSString *currentElement;
-
 @property (nonatomic, strong) NSString *newsTitle;
-
 @property (nonatomic, strong) NSString *newsPubDate;
-
 @property (nonatomic, strong) NSString *newsLink;
 
 @property (nonatomic, strong) void (^completionHandler)(BOOL, NSArray *, NSError *);
@@ -87,7 +84,7 @@
 
 
 
-#pragma mark - NSXMLParserDelegate method implementation
+#pragma mark - NSXMLParserDelegate methods implementation
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser{
     if (self.arrParsedData != nil) {
