@@ -29,13 +29,19 @@
     
     //  Specify the data stroge file path.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    self.dataFilePath = [NSString stringWithFormat:@"%@/newsdata", [paths objectAtIndex:0]];
+    self.dataFilePath = [NSString stringWithFormat:@"%@newsdata", [paths objectAtIndex:0]];
 
     //  Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView addSubview:self.refreshControl];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.dataFilePath])
+    {
+        self.arrNewsData = [[NSMutableArray alloc] initWithContentsOfFile:self.dataFilePath];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
