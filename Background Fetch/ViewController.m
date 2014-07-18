@@ -52,7 +52,14 @@
 
 - (IBAction)removeDataFile:(id)sender
 {
-    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.dataFilePath])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:self.dataFilePath error:nil];
+        
+        self.arrNewsData = nil;
+        
+        [self.tableView reloadData];
+    }
 }
 
 -(void)fetchNewDataWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
