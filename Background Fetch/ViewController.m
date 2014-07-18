@@ -145,7 +145,7 @@
     
     cell.textLabel.text = [dict objectForKey:@"title"];
     cell.detailTextLabel.text = [dict objectForKey:@"pubDate"];
-    
+    [cell setBackgroundColor:self.view.backgroundColor];
     return cell;
 }
 
