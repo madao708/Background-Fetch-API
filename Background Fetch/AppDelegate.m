@@ -14,19 +14,26 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
     
     return YES;
 }
 
 -(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
+    NSDate *fetchStart = [NSDate date];
+    
     ViewController *viewController = (ViewController *)self.window.rootViewController;
     
     [viewController fetchNewDataWithCompletionHandler:
      ^(UIBackgroundFetchResult result)
     {
         completionHandler(result);
+        
+        NSDate *fetchEnd = [NSDate date];
+        
+        NSTimeInterval timeElapsed = [fetchEnd timeIntervalSinceDate:fetchStart];
+        NSLog(@"Background Fetch Duration: %f seconds", timeElapsed);
     }];
 }
 							
