@@ -204,6 +204,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Bilal ARSLAN";
 				TargetAttributes = {
+					77EDACF91977E368001C6ED9 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					77EDAD1A1977E368001C6ED9 = {
 						TestTargetID = 77EDACF91977E368001C6ED9;
 					};

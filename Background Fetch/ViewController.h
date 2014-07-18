@@ -10,6 +10,9 @@
 
 @interface ViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource>
-- (IBAction)removeDataFile:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
+- (IBAction)removeDataFile:(id)sender;
+-(void)fetchNewDataWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
 @end

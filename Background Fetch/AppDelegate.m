@@ -7,13 +7,27 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
     return YES;
+}
+
+-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    ViewController *viewController = (ViewController *)self.window.rootViewController;
+    
+    [viewController fetchNewDataWithCompletionHandler:
+     ^(UIBackgroundFetchResult result)
+    {
+        completionHandler(result);
+    }];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -42,5 +56,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end

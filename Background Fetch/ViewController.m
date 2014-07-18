@@ -21,7 +21,7 @@
 
 @implementation ViewController
 
-#define NewsFeed @"http://feeds.reuters.com/reuters/technologyNews"
+#define NewsFeed @"http://feeds.reuters.com/reuters/worldNews"
 
 - (void)viewDidLoad
 {
@@ -52,6 +52,44 @@
 
 - (IBAction)removeDataFile:(id)sender
 {
+    
+}
+
+-(void)fetchNewDataWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    XMLParser *xmlParser = [[XMLParser alloc] initWithXMLURLString:NewsFeed];
+    [xmlParser startParsingWithCompletionHandler:
+     ^(BOOL success, NSArray *dataArray, NSError *error)
+    {
+        if (success)
+        {
+            NSDictionary *latestDataDict = [dataArray objectAtIndex:0];
+            NSString *latestTitle = [latestDataDict objectForKey:@"title"];
+            
+            NSDictionary *existingDataDict = [self.arrNewsData objectAtIndex:0];
+            NSString *existingTitle = [existingDataDict objectForKey:@"title"];
+            
+            if ([latestTitle isEqualToString:existingTitle]) {
+                completionHandler(UIBackgroundFetchResultNoData);
+                
+                NSLog(@"No new data found!");
+            }
+            else
+            {
+                [self performNewFetchedDataActionsWithDataArray:dataArray];
+                
+                completionHandler(UIBackgroundFetchResultNewData);
+                
+                NSLog(@"New data was fetched!");
+            }
+        }
+        else
+        {
+            completionHandler(UIBackgroundFetchResultFailed);
+            
+            NSLog(@"Failed to fetch new data!");
+        }
+    }];
     
 }
 
